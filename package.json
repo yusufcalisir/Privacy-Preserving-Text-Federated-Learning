@@ -1,0 +1,27 @@
+{
+  "name": "privatext-fl",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000P\u0000r\u0000i\u0000v\u0000a\u0000c\u0000y\u0000-\u0000P\u0000r\u0000e\u0000s\u0000e\u0000r\u0000v\u0000i\u0000n\u0000g\u0000-\u0000T\u0000e\u0000x\u0000t\u0000-\u0000F\u0000e\u0000d\u0000e\u0000r\u0000a\u0000t\u0000e\u0000d\u0000-\u0000L\u0000e\u0000a\u0000r\u0000n\u0000i\u0000n\u0000g\u0000\r\u0000 \u0000",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yusufcalisir/Privacy-Preserving-Text-Federated-Learning.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/yusufcalisir/Privacy-Preserving-Text-Federated-Learning/issues"
+  },
+  "homepage": "https://github.com/yusufcalisir/Privacy-Preserving-Text-Federated-Learning#readme",
+  "dependencies": {
+    "@tensorflow/tfjs": "^4.22.0",
+    "express": "^5.2.1",
+    "socket.io": "^4.8.3"
+  }
+}

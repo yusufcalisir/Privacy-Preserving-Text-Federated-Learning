@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>PrivaText FL - English Version</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        padding: 30px;
+        background: #eceff1;
+        color: #37474f;
+      }
+      .container {
+        max-width: 700px;
+        margin: auto;
+      }
+      .card {
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        margin-bottom: 25px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      }
+      input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #cfd8dc;
+        border-radius: 6px;
+        box-sizing: border-box;
+        margin-bottom: 15px;
+      }
+      .btn-group {
+        display: flex;
+        gap: 10px;
+      }
+      button {
+        flex: 1;
+        padding: 12px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: 0.3s;
+      }
+      .spam-btn {
+        background: #e53935;
+        color: white;
+      }
+      .ham-btn {
+        background: #43a047;
+        color: white;
+      }
+      .predict-btn {
+        background: #1e88e5;
+        color: white;
+      }
+      button:hover {
+        opacity: 0.8;
+      }
+      #status {
+        font-style: italic;
+        color: #78909c;
+        margin-top: 10px;
+      }
+      .analysis-text {
+        font-family: monospace;
+        font-size: 0.9em;
+        background: #fdfdfd;
+        padding: 10px;
+        border-radius: 4px;
+        border-left: 4px solid #1e88e5;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>PrivaText FL Agent</h1>
+
+      <div class="card">
+        <h3>1. Local Training</h3>
+        <p>Teach the model without sharing your text data.</p>
+        <input
+          type="text"
+          id="trainInput"
+          placeholder="Enter message (e.g., 'free winner cash')"
+        />
+        <div class="btn-group">
+          <button class="spam-btn" onclick="trainAgent(1)">
+            Train as Spam
+          </button>
+          <button class="ham-btn" onclick="trainAgent(0)">
+            Train as Normal
+          </button>
+        </div>
+        <p id="status">Waiting for model initialization...</p>
+      </div>
+
+      <div class="card">
+        <h3>2. Model Prediction</h3>
+        <input
+          type="text"
+          id="testInput"
+          placeholder="Test the shared intelligence..."
+        />
+        <button class="predict-btn" onclick="runPrediction()">
+          Run Prediction
+        </button>
+        <div id="result" style="margin-top: 15px"></div>
+      </div>
+    </div>
+    <script src="client.js"></script>
+  </body>
+</html>
