@@ -9,7 +9,7 @@ const io = new Server(server);
 app.use(express.static("public"));
 
 let weightPool = [];
-const MIN_REPORTS = 2;
+const MIN_REPORTS = 2; 
 
 // Federated Averaging (FedAvg) Logic
 function federatedAverage(weightsArray) {
