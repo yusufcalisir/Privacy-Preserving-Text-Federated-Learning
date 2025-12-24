@@ -2,9 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>PrivaText FL - English Version</title>
+    <title>PrivaText FL - Persistent AI</title>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
     <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <style>
       body {
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -13,16 +15,25 @@
         color: #37474f;
       }
       .container {
-        max-width: 700px;
+        max-width: 900px;
         margin: auto;
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
       }
       .card {
         background: white;
         padding: 25px;
         border-radius: 12px;
-        margin-bottom: 25px;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        flex: 1;
+        min-width: 300px;
       }
+      .full-width {
+        width: 100%;
+        flex: 100%;
+      }
+
       input {
         width: 100%;
         padding: 12px;
@@ -34,6 +45,7 @@
       .btn-group {
         display: flex;
         gap: 10px;
+        margin-bottom: 10px;
       }
       button {
         flex: 1;
@@ -44,6 +56,7 @@
         font-weight: 600;
         transition: 0.3s;
       }
+
       .spam-btn {
         background: #e53935;
         color: white;
@@ -56,13 +69,24 @@
         background: #1e88e5;
         color: white;
       }
+      .save-btn {
+        background: #546e7a;
+        color: white;
+      }
+      .reset-btn {
+        background: #cfd8dc;
+        color: #37474f;
+      }
+
       button:hover {
         opacity: 0.8;
       }
+
       #status {
         font-style: italic;
         color: #78909c;
         margin-top: 10px;
+        font-size: 0.9em;
       }
       .analysis-text {
         font-family: monospace;
@@ -72,15 +96,28 @@
         border-radius: 4px;
         border-left: 4px solid #1e88e5;
       }
+
+      /* Chart Container */
+      .chart-container {
+        position: relative;
+        height: 200px;
+        width: 100%;
+        margin-top: 20px;
+      }
     </style>
   </head>
   <body>
     <div class="container">
-      <h1>PrivaText FL Agent</h1>
+      <div class="full-width">
+        <h1>
+          PrivaText FL Agent
+          <span style="font-size: 0.5em; color: #78909c">v3.0 Persistent</span>
+        </h1>
+      </div>
 
       <div class="card">
         <h3>1. Local Training</h3>
-        <p>Teach the model without sharing your text data.</p>
+        <p>Train locally. Watch the loss drop.</p>
         <input
           type="text"
           id="trainInput"
@@ -94,20 +131,54 @@
             Train as Normal
           </button>
         </div>
-        <p id="status">Waiting for model initialization...</p>
+
+        <div class="chart-container">
+          <canvas id="trainingChart"></canvas>
+        </div>
+        <p id="status">System initializing...</p>
       </div>
 
-      <div class="card">
-        <h3>2. Model Prediction</h3>
-        <input
-          type="text"
-          id="testInput"
-          placeholder="Test the shared intelligence..."
-        />
-        <button class="predict-btn" onclick="runPrediction()">
-          Run Prediction
-        </button>
-        <div id="result" style="margin-top: 15px"></div>
+      <div
+        class="card"
+        style="
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        "
+      >
+        <div>
+          <h3>2. Prediction</h3>
+          <input type="text" id="testInput" placeholder="Test message..." />
+          <button
+            class="predict-btn"
+            style="width: 100%"
+            onclick="runPrediction()"
+          >
+            Run Prediction
+          </button>
+          <div id="result" style="margin-top: 15px"></div>
+        </div>
+
+        <div
+          style="
+            margin-top: 30px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+          "
+        >
+          <h3>3. Model Management</h3>
+          <p style="font-size: 0.9em; color: #666">
+            Save your local AI brain to the browser so you don't lose progress.
+          </p>
+          <div class="btn-group">
+            <button class="save-btn" onclick="saveModel()">
+              💾 Save to Browser
+            </button>
+            <button class="reset-btn" onclick="resetModel()">
+              🗑️ Reset Brain
+            </button>
+          </div>
+        </div>
       </div>
     </div>
     <script src="client.js"></script>
